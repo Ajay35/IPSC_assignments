@@ -1,8 +1,10 @@
 import sys
-import randoimport numpy as np
+import random
+import numpy as np
 
 def matrix_multiply(mat1,mat2):
-
+	m1,n1=mat1.shape
+	m2,n2=mat2.shape
 	if mat1.shape[1] != mat2.shape[0]:
 		print('n1 and m2 are not equal ,multiplication not possible')
 		return None
