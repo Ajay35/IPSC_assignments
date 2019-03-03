@@ -53,13 +53,11 @@ public:
 void csr_matmat_pass1(int n_row,int n_col,vector<int> Ap,vector<int> Aj,vector<int> Bp,vector<int> Bj,vector<int>& Cp)
 {
     cout<<"pass1 "<<endl;
-    // method that uses O(n) temp storage
     std::vector<int> mask(n_col, -1);
     Cp[0] = 0;
 
     int nnz = 0;
     for(int i = 0; i < n_row; i++){
-        //npy_intp row_nnz = 0;
     	int row_nnz = 0;
         for(int jj = Ap[i]; jj < Ap[i+1]; jj++){
             int j = Aj[jj];
@@ -72,15 +70,7 @@ void csr_matmat_pass1(int n_row,int n_col,vector<int> Ap,vector<int> Aj,vector<i
             }
         }
 
-        //npy_intp next_nnz = nnz + row_nnz;
         int next_nnz = nnz + row_nnz;
-       // if (row_nnz > NPY_MAX_INTP - nnz || next_nnz != (int)next_nnz) {
-            /*
-             * Index overflowed. Note that row_nnz <= n_col and cannot overflow
-             */
-        //    throw std::overflow_error("nnz of the result is too large");
-        //}*/
-
         nnz = next_nnz;
         Cp[i+1] = nnz;
     }
@@ -129,7 +119,7 @@ void csr_matmat_pass2(int n_row,int n_col,vector<int> Ap,vector<int> Aj,vector<i
 
             int temp = head;
             head = next[head];
-            next[temp] = -1; //clear arrays
+            next[temp] = -1;
             sums[temp] =  0;
         }
         Cp[i+1] = nnz;
