@@ -75,7 +75,7 @@ original_mat=A
 q, r = myqr(A)
 print('q:\n', q.round(6))
 print('r:\n', r.round(6))
-print('original matrix:\n',A)
+print('original matrix:\n',original_mat)
 print("Checking solution:\n")
 print(matrix_multiply(q,r))
 
@@ -86,28 +86,19 @@ r_d=r[:n,:n]
 print('new q shape',q_d.shape)
 print('new r shape',r_d.shape)
 # y=Q^t b
-Qt=get_transpose(q_r)
+Qt=get_transpose(q_d)
 y=matrix_vector(Qt,b)
 
 
 #solve Rx=y by back substitution
-x=backward_substituion(r,y,n)
+x=backward_substituion(r_d,y,n)
 print("ans",x)
-
-print('Final answer:')
 c=original_mat.dot(x)
 c=c-b
 print('difference between solutions:')
 print(np.linalg.norm(c))
 
-## using inbuilt functions
-in_ans=np.linalg.solve(original_mat,b)
-print('Final answer using inbuilt function:')
-print(in_ans)
-c=original_mat.dot(in_ans)
-c=c-b
-print('difference between solutions using inbuilt functions:')
-print(np.linalg.norm(c))
+
 
 
 
